@@ -1,0 +1,14 @@
+---
+- name: Initializing Vagrant Box
+  hosts: vagrant
+  remote_user: vagrant
+
+  tasks:
+  - include: tasks/init-common.yml
+  - include: tasks/site-create.yml
+
+  - name: Install PHPUnit
+    command: composer global require "phpunit/phpunit=4.4.*" creates=/home/vagrant/.composer/vendor/bin/phpunit
+
+  handlers:
+  - include: handlers/main.yml
