@@ -1,0 +1,166 @@
+
+<html>
+<!-- WHACKAMOLE.DEV!!!! -->
+<head>
+	<script src="/js/jquery.js"></script>
+	<title>xxxxxWhack@Molexxxx</title>
+	<h1 class="outsideThings">whackAmole</h1>
+	<div id="allboxes">
+		<img class="mole" id="b1" src="/img/molep.jpg" data-value="1">
+		<img class="mole" id="b2" src="/img/molep.jpg" data-value="2">
+		<img blass="mole" id="b3" src="/img/molep.jpg" data-value="3">
+		<img class="mole" id="b4" src="/img/molep.jpg" data-value="4">
+		<img class="mole" id="b5" src="/img/molep.jpg" data-value="5">
+		<img blass="mole" id="b6" src="/img/molep.jpg" data-value="6">
+		<img class="mole" id="b7" src="/img/molep.jpg" data-value="7">
+		<img class="mole" id="b8" src="/img/molep.jpg" data-value="8">
+		<img blass="mole" id="b9" src="/img/molep.jpg" data-value="9">
+	</div>
+	<div>
+		<button name="start" id="button">START!</button>
+	</div>
+	<div id="outsideBox">
+		<h2 id="rounder" class="outsideThings">Score: 0</h2>
+		<pre id="timer" class="outsideThings">0 Seconds</pre>
+	</div>	
+	<style>
+		#outsideBox{
+			border: solid navy;
+		}
+		#button{
+			font-size: 21px;
+			padding: 10px 15px 11px !important;
+			padding: 5px 5px 5px 20px;
+			border-radius: 50px;
+			background-color: red;
+			border: 1px solid #666;
+			font-weight: bold;
+			box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+			margin-left: 310px;
+			color: navy;
+		}
+		.outsideThings{
+			text-align: center;
+		}
+		body{
+			/*background-color: #F0F8FF;*/
+			background-image: url("/img/molejar.jpg");
+			font-family: Georgia;
+			display: inline-block;
+			margin-left: 16%;
+			position: relative;
+			color: navy;
+		}
+		img{
+			border-radius: 180px;
+			opacity: .005;
+			border: solid;
+		}
+		#allboxes{
+			border: solid;
+			height: 505px;
+			width: 720;			
+		}
+	</style>
+</head>
+<body>
+
+<script>
+var tile = 99;
+var count = 0;
+var compMole = 0;
+var userMole = 0;
+var theTime = 0;
+
+function getRandom(){
+	tile = Math.floor((Math.random() * 9) + 1);
+	// console.log(tile);
+	console.log('looped');
+	if(tile != userMole){
+		if(tile == 1){
+			$('#b1').css("opacity", 1);
+			compMole = 1;
+		}
+		if(tile == 2){
+			$('#b2').css("opacity", 1);
+			compMole = 2;
+		}
+		if(tile == 3){
+			$('#b3').css("opacity", 1);
+			compMole = 3;
+		}
+		if(tile == 4){
+			$('#b4').css("opacity", 1);
+			compMole = 4;
+		}
+		if(tile == 5){
+			$('#b5').css("opacity", 1);
+			compMole = 5;
+		}
+		if(tile == 6){
+			$('#b6').css("opacity", 1);
+			compMole = 6;
+		}
+		if(tile == 7){
+			$('#b7').css("opacity", 1);
+			compMole = 7;
+		}
+		if(tile == 8){
+			$('#b8').css("opacity", 1);
+			compMole = 8;
+		}
+		if(tile == 9){
+			$('#b9').css("opacity", 1);
+			compMole = 9;
+		}
+	}
+	else {
+		getRandom();
+	}
+console.log('compMole is ' + compMole);
+};
+
+console.log("tile outside function is " + tile);
+
+$('button').on('click', function() {
+	// old timer
+var start = new Date;
+
+timer = 0;
+timer2 = 20;
+setInterval(function() {
+	var theTimer = $('#timer').text(timer + " Seconds");
+	timer++;
+	timer2--;
+	console.log(timer2);
+	if (timer % 3 == 0 || timer % 5 == 0 || timer % 8 == 0 || timer % 10 == 0 || timer % 13 == 0 || timer % 15 == 0 || timer % 20 == 0 || timer % 30 == 0){
+		$('img').css("opacity", .005);
+		getRandom();
+	}
+	if (timer2 < 1 && count == 0){
+		alert('TIME OUT!');
+    	location.reload();
+	}
+}, 1000);
+// old timer
+});
+
+$('img').on('click', function(event) {
+	userMole = ($(this).data('value'));
+	console.log('userMole is ' + userMole);
+	if(compMole == userMole){
+    	$(this).css("opacity", .005);
+    	getRandom();
+    }
+    else {
+    	alert('GAME OVER!');
+    	location.reload();
+    }
+count = count + 1;
+console.log('count is ' + count);
+$('#rounder').html("Score " + count);
+});
+
+</script>
+</body>
+</html>

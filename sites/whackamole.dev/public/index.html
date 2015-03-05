@@ -1,0 +1,133 @@
+<html>
+<head>
+	<script src="/js/jquery.js"></script>
+	<title>Whack@Mole</title>
+	<div id="allboxes">
+		<img class="mole" id="b1" src="/img/molep.jpg" data-value="1">
+		<img class="mole" id="b2" src="/img/molep.jpg" data-value="2">
+		<img blass="mole" id="b3" src="/img/molep.jpg" data-value="3">
+		<img class="mole" id="b4" src="/img/molep.jpg" data-value="4">
+		<img class="mole" id="b5" src="/img/molep.jpg" data-value="5">
+		<img blass="mole" id="b6" src="/img/molep.jpg" data-value="6">
+		<img class="mole" id="b7" src="/img/molep.jpg" data-value="7">
+		<img class="mole" id="b8" src="/img/molep.jpg" data-value="8">
+		<img blass="mole" id="b9" src="/img/molep.jpg" data-value="9">
+	</div>
+	<div>
+		<button name="start">START!</button>
+		<h2 id="rounder">Score: 0</h2>
+		<pre id="timer">0 Seconds</pre>
+	</div>	
+	<style>
+		img{
+			opacity: .005;
+			border: solid;
+		}
+		#allboxes{
+			border: solid;
+			height: 505px;
+			width: 750;			
+
+		}
+	</style>
+</head>
+<body>
+
+<script>
+var tile = 99;
+var count = 0;
+var compMole = 0;
+var userMole = 0;
+var theTime = 0;
+
+function getRandom(){
+	tile = Math.floor((Math.random() * 9) + 1);
+	// console.log(tile);
+	console.log('looped');
+	if(tile != userMole){
+		if(tile == 1){
+			$('#b1').css("opacity", 1);
+			compMole = 1;
+		}
+		if(tile == 2){
+			$('#b2').css("opacity", 1);
+			compMole = 2;
+		}
+		if(tile == 3){
+			$('#b3').css("opacity", 1);
+			compMole = 3;
+		}
+		if(tile == 4){
+			$('#b4').css("opacity", 1);
+			compMole = 4;
+		}
+		if(tile == 5){
+			$('#b5').css("opacity", 1);
+			compMole = 5;
+		}
+		if(tile == 6){
+			$('#b6').css("opacity", 1);
+			compMole = 6;
+		}
+		if(tile == 7){
+			$('#b7').css("opacity", 1);
+			compMole = 7;
+		}
+		if(tile == 8){
+			$('#b8').css("opacity", 1);
+			compMole = 8;
+		}
+		if(tile == 9){
+			$('#b9').css("opacity", 1);
+			compMole = 9;
+		}
+	}
+	else {
+		getRandom();
+	}
+console.log('compMole is ' + compMole);
+};
+
+
+
+console.log("tile outside function is " + tile);
+
+$('button').on('click', function() {
+	// old timer
+var start = new Date;
+
+timer = 0;
+setInterval(function() {
+	var theTimer = $('#timer').text(timer + " Seconds");
+	timer++;
+	if (timer % 3 == 0 || timer % 5 == 0 || timer % 8 == 0 || timer % 11 == 0 || timer % 20 == 0 || timer % 15 == 0){
+		$('img').css("opacity", .005);
+		getRandom();
+	}
+    // 
+}, 1000);
+// old timer
+	
+});
+
+
+$('img').on('click', function(event) {
+	userMole = ($(this).data('value'));
+	console.log('userMole is ' + userMole);
+	if(compMole == userMole){
+    	$(this).css("opacity", .005);
+    	getRandom();
+    }
+    else {
+    	alert('YOU LOSE');
+    }
+count = count + 1;
+console.log('count is ' + count);
+$('#rounder').html("Score: " + count);
+});
+
+</script>
+
+
+</body>
+</html>
