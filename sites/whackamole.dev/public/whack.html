@@ -20,12 +20,12 @@
 		<button name="start" id="button">START!</button>
 	</div>
 	<div id="outsideBox">
-		<h2 id="rounder" class="outsideThings">Score: 0</h2>
+		<h2 id="rounder" class="outsideThings"><pre>Score: 0</pre></h2>
 		<pre id="timer" class="outsideThings">0 Seconds</pre>
 	</div>	
 	<style>
-		#outsideBox{
-			border: solid navy;
+		.class{
+			opacity: 1;
 		}
 		#button{
 			font-size: 21px;
@@ -43,7 +43,6 @@
 			text-align: center;
 		}
 		body{
-			/*background-color: #F0F8FF;*/
 			background-image: url("/img/molejar.jpg");
 			font-family: Georgia;
 			display: inline-block;
@@ -54,12 +53,17 @@
 		img{
 			border-radius: 180px;
 			opacity: .005;
-			border: solid;
+			/*border: solid;*/
 		}
 		#allboxes{
 			border: solid;
 			height: 505px;
 			width: 720;			
+		}
+		#outsideBox{
+			border: solid navy;
+			background-color: white;
+			color: white;
 		}
 	</style>
 </head>
@@ -73,8 +77,8 @@ var userMole = 0;
 var theTime = 0;
 
 function getRandom(){
-	tile = Math.floor((Math.random() * 9) + 1);
-	// console.log(tile);
+	tile = Math.floor((Math.random() * 9)+ 1);
+	console.log('tile is ' + tile);
 	console.log('looped');
 	if(tile != userMole){
 		if(tile == 1){
@@ -119,21 +123,22 @@ function getRandom(){
 	}
 console.log('compMole is ' + compMole);
 };
-
 console.log("tile outside function is " + tile);
 
 $('button').on('click', function() {
 	// old timer
+$('button').html('**GO!**');
+$('#outsideBox').css('color', 'navy');
 var start = new Date;
 
 timer = 0;
-timer2 = 20;
+timer2 = 10;
 setInterval(function() {
 	var theTimer = $('#timer').text(timer + " Seconds");
 	timer++;
 	timer2--;
 	console.log(timer2);
-	if (timer % 3 == 0 || timer % 5 == 0 || timer % 8 == 0 || timer % 10 == 0 || timer % 13 == 0 || timer % 15 == 0 || timer % 20 == 0 || timer % 30 == 0){
+	if (timer % 3 == 0 || timer % 8 == 0 || timer % 10 == 0 || timer % 13 == 0 || timer % 15 == 0 || timer % 20 == 0){
 		$('img').css("opacity", .005);
 		getRandom();
 	}
@@ -141,7 +146,11 @@ setInterval(function() {
 		alert('TIME OUT!');
     	location.reload();
 	}
-}, 1000);
+	if (timer == 31){
+		alert('YOUR FINAL SCORE: ' + count);
+		location.reload();
+	}
+}, 990);
 // old timer
 });
 
@@ -158,7 +167,7 @@ $('img').on('click', function(event) {
     }
 count = count + 1;
 console.log('count is ' + count);
-$('#rounder').html("Score " + count);
+$('#rounder').html('<pre>' + "Score " + count + '</pre>');
 });
 
 </script>
